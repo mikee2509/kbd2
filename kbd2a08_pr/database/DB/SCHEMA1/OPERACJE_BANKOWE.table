@@ -1,14 +1,14 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <table xmlns="http://xmlns.oracle.com/jdeveloper/1211/offlinedb">
-  <name>PODOPIECZNI</name>
+  <name>OPERACJE_BANKOWE</name>
   <columns>
     <column>
-      <name>ID_PODOP</name>
+      <name>ID_OPERACJI</name>
       <dataTypeUsage>
         <attributeValues>
           <entry>
             <key>precision</key>
-            <value class="java.lang.String">4</value>
+            <value class="java.lang.String">8</value>
           </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
@@ -20,7 +20,7 @@
         <entry>
           <key>AUTO_GENERATED_SEQUENCE</key>
           <value class="oracle.javatools.db.NameBasedID">
-            <name>ID_PODOP_SEQ</name>
+            <name>ID_OPER_SEQ</name>
             <schemaName>SCHEMA1</schemaName>
             <type>SEQUENCE</type>
           </value>
@@ -28,7 +28,7 @@
         <entry>
           <key>AUTO_GENERATED_SEQUENCE_TRIGGER</key>
           <value class="oracle.javatools.db.NameBasedID">
-            <name>ID_PODOP_SEQ_TRG</name>
+            <name>ID_OPER_SEQ_TRG</name>
             <schemaName>SCHEMA1</schemaName>
             <type>TRIGGER</type>
           </value>
@@ -40,76 +40,46 @@
       </properties>
     </column>
     <column>
-      <name>IMIE</name>
+      <name>KWOTA</name>
       <dataTypeUsage>
         <attributeValues>
           <entry>
-            <key>size</key>
-            <value class="java.lang.Long">20</value>
+            <key>precision</key>
+            <value class="java.lang.String">10</value>
+          </entry>
+          <entry>
+            <key>scale</key>
+            <value class="java.lang.Integer">2</value>
           </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>VARCHAR2</typeName>
+          <typeName>NUMBER</typeName>
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">Maksymalnie 20 znakow.</value>
+          <value class="java.lang.String">Maksymalna kwota: 99999999,99 zł.</value>
         </entry>
       </properties>
     </column>
     <column>
-      <name>NAZWISKO</name>
+      <name>DATA_OPERACJI</name>
       <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>size</key>
-            <value class="java.lang.Long">40</value>
-          </entry>
-        </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>VARCHAR2</typeName>
+          <typeName>DATE</typeName>
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
-      <properties>
-        <entry>
-          <key>Comment</key>
-          <value class="java.lang.String">Maksymalnie 40 znakow.</value>
-        </entry>
-      </properties>
     </column>
     <column>
-      <name>STATUS</name>
+      <name>TYTUL</name>
       <dataTypeUsage>
         <attributeValues>
           <entry>
             <key>size</key>
-            <value class="java.lang.Long">1</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>CHAR</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <default class="java.lang.String">&apos;A&apos;</default>
-      <notNull>true</notNull>
-      <properties>
-        <entry>
-          <key>Comment</key>
-          <value class="java.lang.String">Wartosc &apos;A&apos; (aktywny) lub &apos;N&apos; (nieaktywny).</value>
-        </entry>
-      </properties>
-    </column>
-    <column>
-      <name>EMAIL</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>size</key>
-            <value class="java.lang.Long">254</value>
+            <value class="java.lang.Long">200</value>
           </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
@@ -117,6 +87,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Maksymalnie 200 znakow.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>UWAGI</name>
@@ -124,7 +100,7 @@
         <attributeValues>
           <entry>
             <key>size</key>
-            <value class="java.lang.Long">1000</value>
+            <value class="java.lang.Long">500</value>
           </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
@@ -135,19 +111,19 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">Opcjonalne, dodatkowe informacje.</value>
+          <value class="java.lang.String">Maksymalnie 500 znakow.</value>
         </entry>
       </properties>
     </column>
   </columns>
   <constraints>
     <constraint class="oracle.javatools.db.PKConstraint">
-      <name>PODOP_PK</name>
+      <name>OPERACJE_BANKOWE_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
-          <name>ID_PODOP</name>
+          <name>ID_OPERACJI</name>
           <parent class="oracle.javatools.db.NameBasedID">
-            <name>PODOPIECZNI</name>
+            <name>OPERACJE_BANKOWE</name>
             <schemaName>SCHEMA1</schemaName>
             <type>TABLE</type>
           </parent>
@@ -157,68 +133,23 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>PODOPIECZNI_PK</name>
+        <name>OPERACJE_BANKOWE_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
-          <name>PODOPIECZNI</name>
+          <name>OPERACJE_BANKOWE</name>
           <schemaName>SCHEMA1</schemaName>
           <type>TABLE</type>
         </parent>
         <schemaName>SCHEMA1</schemaName>
         <type>INDEX</type>
       </indexID>
-    </constraint>
-    <constraint class="oracle.javatools.db.UniqueConstraint">
-      <name>PODOP_EMAIL_UN</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>EMAIL</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>PODOPIECZNI</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>PODOP_EMAIL_UN</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>PODOPIECZNI</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
-    </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>PODOP_STAT_CK</name>
-      <checkCondition>STATUS IN (&apos;A&apos;, &apos;N&apos;)</checkCondition>
-      <enabled>true</enabled>
     </constraint>
   </constraints>
   <indexes>
     <index>
-      <name>PODOPIECZNI_PK</name>
+      <name>OPERACJE_BANKOWE_PK</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>ID_PODOP</expressionSource>
-          <orderType>ASC</orderType>
-        </columnExpression>
-      </columnExpressions>
-      <indexType>UNIQUE</indexType>
-      <schema>
-        <name>SCHEMA1</name>
-      </schema>
-      <systemGenerated>true</systemGenerated>
-    </index>
-    <index>
-      <name>PODOP_EMAIL_UN</name>
-      <columnExpressions>
-        <columnExpression>
-          <expressionSource>EMAIL</expressionSource>
+          <expressionSource>ID_OPERACJI</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>

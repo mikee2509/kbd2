@@ -86,7 +86,7 @@
   </columns>
   <constraints>
     <constraint class="oracle.javatools.db.PKConstraint">
-      <name>KONTA_PK</name>
+      <name>KONT_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>NR_KONTA</name>
@@ -101,7 +101,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>KONTA_PK</name>
+        <name>KONT_PK_IDX</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>KONTA</name>
           <schemaName>SCHEMA1</schemaName>
@@ -145,7 +145,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>KONTA_PK</name>
+      <name>KONT_PK_IDX</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>NR_KONTA</expressionSource>

@@ -202,32 +202,6 @@
     </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>OPERACJE_BANKOWE_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>ID_OPERACJI</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>OPERACJE_BANKOWE</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>OPERACJE_BANKOWE_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>OPERACJE_BANKOWE</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
-    </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
       <name>NR_KONTA_NADAWCY_FK</name>
       <columnIDs>
@@ -244,7 +218,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>KONTA_PK</name>
+        <name>KONT_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>KONTA</name>
           <schemaName>SCHEMA1</schemaName>
@@ -270,7 +244,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>KONTA_PK</name>
+        <name>KONT_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>KONTA</name>
           <schemaName>SCHEMA1</schemaName>
@@ -332,10 +306,36 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>OP_BANK_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>ID_OPERACJI</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>OPERACJE_BANKOWE</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>OP_BANK_PK_IDX</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>OPERACJE_BANKOWE</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
+    </constraint>
   </constraints>
   <indexes>
     <index>
-      <name>OPERACJE_BANKOWE_PK</name>
+      <name>OP_BANK_PK_IDX</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>ID_OPERACJI</expressionSource>

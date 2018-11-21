@@ -74,58 +74,6 @@
     </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>SL_KL_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>ID_SLOWA_KL</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>SLOWA_KLUCZOWE</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>SL_KL_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>SLOWA_KLUCZOWE</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
-    </constraint>
-    <constraint class="oracle.javatools.db.UniqueConstraint">
-      <name>SL_KL_WART_UN</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>WARTOSC</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>SLOWA_KLUCZOWE</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>SLOWA_KLUCZOWE_UK1</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>SLOWA_KLUCZOWE</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
-    </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
       <name>SL_KL_PODOP_FK</name>
       <columnIDs>
@@ -152,13 +100,65 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>SL_KL_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>ID_SLOWA_KL</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>SLOWA_KLUCZOWE</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>SL_KL_PK_IDX</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>SLOWA_KLUCZOWE</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
+    </constraint>
+    <constraint class="oracle.javatools.db.UniqueConstraint">
+      <name>SL_KL_WART_UN</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>WARTOSC</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>SLOWA_KLUCZOWE</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>SL_KL_WART_UN_IDX</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>SLOWA_KLUCZOWE</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
+    </constraint>
   </constraints>
   <indexes>
     <index>
-      <name>SLOWA_KLUCZOWE_UK1</name>
+      <name>SL_KL_PK_IDX</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>WARTOSC</expressionSource>
+          <expressionSource>ID_SLOWA_KL</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>
@@ -169,10 +169,10 @@
       <systemGenerated>true</systemGenerated>
     </index>
     <index>
-      <name>SL_KL_PK</name>
+      <name>SL_KL_WART_UN_IDX</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>ID_SLOWA_KL</expressionSource>
+          <expressionSource>WARTOSC</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>

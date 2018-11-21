@@ -156,6 +156,37 @@
     </column>
   </columns>
   <constraints>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>PODOP_STAT_CK</name>
+      <checkCondition>STATUS IN (&apos;A&apos;, &apos;N&apos;)</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>PODOP_KONT_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>NR_KONTA</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>PODOPIECZNI</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>KONT_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>KONTA</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
     <constraint class="oracle.javatools.db.PKConstraint">
       <name>PODOP_PK</name>
       <columnIDs>
@@ -172,7 +203,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>PODOPIECZNI_PK</name>
+        <name>PODOP_PK_IDX</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>PODOPIECZNI</name>
           <schemaName>SCHEMA1</schemaName>
@@ -198,7 +229,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>PODOP_EMAIL_UN</name>
+        <name>PODOP_EMAIL_UN_IDX</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>PODOPIECZNI</name>
           <schemaName>SCHEMA1</schemaName>
@@ -208,44 +239,13 @@
         <type>INDEX</type>
       </indexID>
     </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>PODOP_KONT_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>NR_KONTA</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>PODOPIECZNI</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>KONTA_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>KONTA</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>PODOP_STAT_CK</name>
-      <checkCondition>STATUS IN (&apos;A&apos;, &apos;N&apos;)</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
   </constraints>
   <indexes>
     <index>
-      <name>PODOPIECZNI_PK</name>
+      <name>PODOP_EMAIL_UN_IDX</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>ID_PODOP</expressionSource>
+          <expressionSource>EMAIL</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>
@@ -256,10 +256,10 @@
       <systemGenerated>true</systemGenerated>
     </index>
     <index>
-      <name>PODOP_EMAIL_UN</name>
+      <name>PODOP_PK_IDX</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>EMAIL</expressionSource>
+          <expressionSource>ID_PODOP</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>

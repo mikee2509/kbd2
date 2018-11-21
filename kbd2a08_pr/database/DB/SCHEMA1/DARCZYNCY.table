@@ -92,7 +92,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>DARCZYNCY_PK</name>
+        <name>DARCZYNCY_PK_IDX</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>DARCZYNCY</name>
           <schemaName>SCHEMA1</schemaName>
@@ -105,7 +105,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>DARCZYNCY_PK</name>
+      <name>DARCZYNCY_PK_IDX</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>ID_DARCZYNCY</expressionSource>

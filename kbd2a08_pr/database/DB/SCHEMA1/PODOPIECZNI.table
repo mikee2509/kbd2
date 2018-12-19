@@ -40,27 +40,6 @@
       </properties>
     </column>
     <column>
-      <name>IMIE</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>size</key>
-            <value class="java.lang.Long">20</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>VARCHAR2</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>true</notNull>
-      <properties>
-        <entry>
-          <key>Comment</key>
-          <value class="java.lang.String">Maksymalnie 20 znakow.</value>
-        </entry>
-      </properties>
-    </column>
-    <column>
       <name>NAZWISKO</name>
       <dataTypeUsage>
         <attributeValues>
@@ -78,6 +57,27 @@
         <entry>
           <key>Comment</key>
           <value class="java.lang.String">Maksymalnie 40 znakow.</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>IMIE</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">20</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Maksymalnie 20 znakow.</value>
         </entry>
       </properties>
     </column>
@@ -102,6 +102,21 @@
           <value class="java.lang.String">Wartosc &apos;A&apos; (aktywny) lub &apos;N&apos; (nieaktywny).</value>
         </entry>
       </properties>
+    </column>
+    <column>
+      <name>ID_KONTA</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>precision</key>
+            <value class="java.lang.String">6</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>NUMBER</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
     </column>
     <column>
       <name>EMAIL</name>
@@ -139,54 +154,8 @@
         </entry>
       </properties>
     </column>
-    <column>
-      <name>NR_KONTA</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>precision</key>
-            <value class="java.lang.String">26</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>true</notNull>
-    </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>PODOP_STAT_CK</name>
-      <checkCondition>STATUS IN (&apos;A&apos;, &apos;N&apos;)</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>PODOP_KONT_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>NR_KONTA</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>PODOPIECZNI</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>KONT_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>KONTA</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
     <constraint class="oracle.javatools.db.PKConstraint">
       <name>PODOP_PK</name>
       <columnIDs>
@@ -239,6 +208,37 @@
         <type>INDEX</type>
       </indexID>
     </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>PODOP_KONT_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>ID_KONTA</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>PODOPIECZNI</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>KONT_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>KONTA</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>PODOP_STAT_CK</name>
+      <checkCondition>STATUS IN (&apos;A&apos;, &apos;N&apos;)</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
   </constraints>
   <indexes>
     <index>
@@ -254,6 +254,19 @@
         <name>SCHEMA1</name>
       </schema>
       <systemGenerated>true</systemGenerated>
+    </index>
+    <index>
+      <name>PODOP_KONT_FK_IDX</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>ID_KONTA</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
     </index>
     <index>
       <name>PODOP_PK_IDX</name>

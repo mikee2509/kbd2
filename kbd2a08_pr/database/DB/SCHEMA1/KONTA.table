@@ -3,16 +3,31 @@
   <name>KONTA</name>
   <columns>
     <column>
-      <name>NR_KONTA</name>
+      <name>ID_KONTA</name>
       <dataTypeUsage>
         <attributeValues>
           <entry>
             <key>precision</key>
-            <value class="java.lang.String">26</value>
+            <value class="java.lang.String">6</value>
           </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
           <typeName>NUMBER</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+    </column>
+    <column>
+      <name>NR_KONTA</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">26</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>VARCHAR2</typeName>
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
@@ -81,7 +96,7 @@
           <typeName>NUMBER</typeName>
         </dataTypeID>
       </dataTypeUsage>
-      <notNull>true</notNull>
+      <notNull>false</notNull>
     </column>
   </columns>
   <constraints>
@@ -89,7 +104,7 @@
       <name>KONT_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
-          <name>NR_KONTA</name>
+          <name>ID_KONTA</name>
           <parent class="oracle.javatools.db.NameBasedID">
             <name>KONTA</name>
             <schemaName>SCHEMA1</schemaName>
@@ -145,10 +160,23 @@
   </constraints>
   <indexes>
     <index>
+      <name>KONT_DARCZ_FK_IDX</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>ID_DARCZYNCY</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
+    </index>
+    <index>
       <name>KONT_PK_IDX</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>NR_KONTA</expressionSource>
+          <expressionSource>ID_KONTA</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>

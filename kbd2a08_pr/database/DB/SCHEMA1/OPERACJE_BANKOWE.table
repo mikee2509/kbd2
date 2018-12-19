@@ -45,7 +45,7 @@
         <attributeValues>
           <entry>
             <key>precision</key>
-            <value class="java.lang.String">10</value>
+            <value class="java.lang.String">7</value>
           </entry>
           <entry>
             <key>scale</key>
@@ -60,7 +60,7 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">Maksymalna kwota: 99999999,99 zł.</value>
+          <value class="java.lang.String">Maksymalna kwota: 99999,99 zł.</value>
         </entry>
       </properties>
     </column>
@@ -72,6 +72,76 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+    </column>
+    <column>
+      <name>ID_KONTA_NADAWCY</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>precision</key>
+            <value class="java.lang.String">6</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>NUMBER</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+    </column>
+    <column>
+      <name>ID_KONTA_ODBIORCY</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>precision</key>
+            <value class="java.lang.String">6</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>NUMBER</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+    </column>
+    <column>
+      <name>ID_PODOP</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>precision</key>
+            <value class="java.lang.String">4</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>NUMBER</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+    </column>
+    <column>
+      <name>ID_SLOWA_KL</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>precision</key>
+            <value class="java.lang.String">5</value>
+          </entry>
+          <entry>
+            <key>scale</key>
+            <value class="java.lang.Integer">0</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>NUMBER</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Jeśli operacja zostala przypisana do podopiecznego na podstawie slowa kluczowego to ID_SLOWA_KL wskazuje na to slowo kluczowe. Jeżeli dokonano ręcznej modyfikacji przypisania operacji do podopiecznego, ID_SLOWA_KL ustawianie jest na NULL.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>TYTUL</name>
@@ -87,27 +157,6 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>false</notNull>
-      <properties>
-        <entry>
-          <key>Comment</key>
-          <value class="java.lang.String">Maksymalnie 200 znakow.</value>
-        </entry>
-      </properties>
-    </column>
-    <column>
-      <name>NAZWA_NADAWCY</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>size</key>
-            <value class="java.lang.Long">200</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>VARCHAR2</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>true</notNull>
       <properties>
         <entry>
           <key>Comment</key>
@@ -136,77 +185,39 @@
         </entry>
       </properties>
     </column>
-    <column>
-      <name>ID_SLOWA_KL</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>precision</key>
-            <value class="java.lang.String">5</value>
-          </entry>
-          <entry>
-            <key>scale</key>
-            <value class="java.lang.Integer">0</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>true</notNull>
-    </column>
-    <column>
-      <name>NR_KONTA_ODBIORCY</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>precision</key>
-            <value class="java.lang.String">26</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>true</notNull>
-    </column>
-    <column>
-      <name>NR_KONTA_NADAWCY</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>precision</key>
-            <value class="java.lang.String">26</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>true</notNull>
-    </column>
-    <column>
-      <name>ID_PODOP</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>precision</key>
-            <value class="java.lang.String">4</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>false</notNull>
-    </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>NR_KONTA_NADAWCY_FK</name>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>OP_BANK_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
-          <name>NR_KONTA_NADAWCY</name>
+          <name>ID_OPERACJI</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>OPERACJE_BANKOWE</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>OP_BANK_PK_IDX</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>OPERACJE_BANKOWE</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
+    </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>ID_KONTA_NADAWCY_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>ID_KONTA_NADAWCY</name>
           <parent class="oracle.javatools.db.NameBasedID">
             <name>OPERACJE_BANKOWE</name>
             <schemaName>SCHEMA1</schemaName>
@@ -229,10 +240,10 @@
       </referenceID>
     </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
-      <name>NR_KONTA_ODBIORCY_FK</name>
+      <name>ID_KONTA_ODBIORCY_FK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
-          <name>NR_KONTA_ODBIORCY</name>
+          <name>ID_KONTA_ODBIORCY</name>
           <parent class="oracle.javatools.db.NameBasedID">
             <name>OPERACJE_BANKOWE</name>
             <schemaName>SCHEMA1</schemaName>
@@ -306,34 +317,34 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>OP_BANK_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>ID_OPERACJI</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>OPERACJE_BANKOWE</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>OP_BANK_PK_IDX</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>OPERACJE_BANKOWE</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
-    </constraint>
   </constraints>
   <indexes>
+    <index>
+      <name>ID_KONT_NAD_FK_IDX</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>ID_KONTA_NADAWCY</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
+    </index>
+    <index>
+      <name>ID_KONT_ODB_FK_IDX</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>ID_KONTA_ODBIORCY</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
+    </index>
     <index>
       <name>OP_BANK_PK_IDX</name>
       <columnExpressions>
@@ -347,6 +358,32 @@
         <name>SCHEMA1</name>
       </schema>
       <systemGenerated>true</systemGenerated>
+    </index>
+    <index>
+      <name>OP_BANK_PODOP_FK_IDX</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>ID_PODOP</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
+    </index>
+    <index>
+      <name>OP_BANK_SL_KL_FK_IDX</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>ID_SLOWA_KL</expressionSource>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
     </index>
   </indexes>
   <properties>

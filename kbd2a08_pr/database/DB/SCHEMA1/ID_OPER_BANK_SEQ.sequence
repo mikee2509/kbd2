@@ -1,6 +1,6 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <sequence xmlns="http://xmlns.oracle.com/jdeveloper/1211/offlinedb">
-  <name>ID_OPER_SEQ</name>
+  <name>ID_OPER_BANK_SEQ</name>
   <schema>
     <name>SCHEMA1</name>
   </schema>

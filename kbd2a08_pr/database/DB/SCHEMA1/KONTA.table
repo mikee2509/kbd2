@@ -124,52 +124,6 @@
     </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>KONT_DATA_ZAL_CK</name>
-      <checkCondition>(TYP_WLASCICIELA = &apos;F&apos; AND DATA_ZALOZENIA IS NOT NULL) OR (TYP_WLASCICIELA = &apos;D&apos; AND DATA_ZALOZENIA IS NULL)</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>KONT_ID_DARCZYNCY_CK</name>
-      <checkCondition>(TYP_WLASCICIELA = &apos;F&apos; AND ID_DARCZYNCY IS NULL) OR (TYP_WLASCICIELA = &apos;D&apos; AND ID_DARCZYNCY IS NOT NULL)</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>KONT_NR_KONTA_CK</name>
-      <checkCondition>REGEXP_LIKE(NR_KONTA, &apos;^\d{26}$&apos;)</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>KONT_TYP_CK</name>
-      <checkCondition>TYP_WLASCICIELA IN (&apos;F&apos;, &apos;D&apos;)</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>KONT_DARCZ_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>ID_DARCZYNCY</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>KONTA</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>DARCZYNCY_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>DARCZYNCY</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
     <constraint class="oracle.javatools.db.PKConstraint">
       <name>KONT_PK</name>
       <columnIDs>
@@ -221,6 +175,52 @@
         <schemaName>SCHEMA1</schemaName>
         <type>INDEX</type>
       </indexID>
+    </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>KONT_DARCZ_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>ID_DARCZYNCY</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>KONTA</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>DARCZYNCY_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>DARCZYNCY</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_DATA_ZAL_CK</name>
+      <checkCondition>(TYP_WLASCICIELA = &apos;F&apos; AND DATA_ZALOZENIA IS NOT NULL) OR (TYP_WLASCICIELA = &apos;D&apos; AND DATA_ZALOZENIA IS NULL)</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_ID_DARCZYNCY_CK</name>
+      <checkCondition>(TYP_WLASCICIELA = &apos;F&apos; AND ID_DARCZYNCY IS NULL) OR (TYP_WLASCICIELA = &apos;D&apos; AND ID_DARCZYNCY IS NOT NULL)</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_NR_KONTA_CK</name>
+      <checkCondition>REGEXP_LIKE(NR_KONTA, &apos;^\d{26}$&apos;)</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_TYP_CK</name>
+      <checkCondition>TYP_WLASCICIELA IN (&apos;F&apos;, &apos;D&apos;)</checkCondition>
+      <enabled>true</enabled>
     </constraint>
   </constraints>
   <indexes>

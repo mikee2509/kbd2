@@ -1,7 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <sequence xmlns="http://xmlns.oracle.com/jdeveloper/1211/offlinedb">
   <name>ID_SLOWA_KL_SEQ</name>
+  <incrementBy>1</incrementBy>
+  <orderFlag>true</orderFlag>
   <schema>
     <name>SCHEMA1</name>
   </schema>
+  <startWith>1</startWith>
 </sequence>

@@ -28,7 +28,7 @@
         <entry>
           <key>AUTO_GENERATED_SEQUENCE_TRIGGER</key>
           <value class="oracle.javatools.db.NameBasedID">
-            <name>ID_OPER_SEQ_TRG</name>
+            <name>ID_OPER_BANK_SEQ_TRG</name>
             <schemaName>SCHEMA1</schemaName>
             <type>TRIGGER</type>
           </value>

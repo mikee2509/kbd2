@@ -20,6 +20,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Klucz sztuczny.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>WARTOSC</name>
@@ -35,6 +41,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Wartosc ktora szukana jest w tytule operacji. Maksymalnie 200 znakow.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>OPIS</name>
@@ -71,6 +83,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Podopieczny do ktorego nalezy dane slowo kluczowe.</value>
+        </entry>
+      </properties>
     </column>
   </columns>
   <constraints>
@@ -197,6 +215,10 @@
     </index>
   </indexes>
   <properties>
+    <entry>
+      <key>Comment</key>
+      <value class="java.lang.String">Slowa kluczowe pozwalajace dokonac automatycznego przypisania operacji bankowej do podopiecznego na podstawie jej tytulu.</value>
+    </entry>
     <entry>
       <key>TableType</key>
       <value class="oracle.javatools.db.Table$TableType">NORMAL</value>

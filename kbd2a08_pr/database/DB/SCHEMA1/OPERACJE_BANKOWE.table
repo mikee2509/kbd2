@@ -37,6 +37,10 @@
           <key>ColumnSequenceExpander.TriggerNullCheck</key>
           <value class="java.lang.Boolean">true</value>
         </entry>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Klucz sztuczny.</value>
+        </entry>
       </properties>
     </column>
     <column>
@@ -102,6 +106,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Jeden z rachunkow fundacji na ktory zostala wplacona darowizna</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>ID_PODOP</name>
@@ -117,6 +127,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Podopieczny do ktorego przypisana jest operacja.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>ID_SLOWA_KL</name>
@@ -387,6 +403,12 @@
     </index>
   </indexes>
   <properties>
+    <entry>
+      <key>Comment</key>
+      <value class="java.lang.String">Informacje o darowiznach wplacanych na konta podopiecznych. Operacja moze zostac przypisana do podopiecznego na 2 sposoby. 
+1) na podstawie slowa kluczowego - wtedy ID_SLOWA_KL wskazuje na uzyte slowo kluczowe a ID_PODOP wskazuje na podopiecznego. 
+2) w wyniku recznego przypisania - wtedy ID_SLOWA_KL ma wartosc NULL a ID_PODOP wskazuje na podopiecznego. </value>
+    </entry>
     <entry>
       <key>TableType</key>
       <value class="oracle.javatools.db.Table$TableType">NORMAL</value>

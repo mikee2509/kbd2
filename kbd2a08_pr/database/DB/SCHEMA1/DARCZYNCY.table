@@ -16,6 +16,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Klucz sztuczny.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>NAZWA</name>
@@ -34,7 +40,7 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">Maksymalnie 200 znakow.</value>
+          <value class="java.lang.String">Przy automatycznym tworzeniu darczyncy uzupelniana na podstawie nazwy nadawcy przelewu. Maksymalnie 200 znakow.</value>
         </entry>
       </properties>
     </column>
@@ -52,6 +58,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Email jest unikalny posrod wszystkich darczyncow w bazie danych.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>UWAGI</name>
@@ -92,7 +104,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>DARCZYNCY_PK_IDX</name>
+        <name>DARCZYNCY_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>DARCZYNCY</name>
           <schemaName>SCHEMA1</schemaName>
@@ -105,7 +117,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>DARCZYNCY_PK_IDX</name>
+      <name>DARCZYNCY_PK</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>ID_DARCZYNCY</expressionSource>
@@ -120,6 +132,10 @@
     </index>
   </indexes>
   <properties>
+    <entry>
+      <key>Comment</key>
+      <value class="java.lang.String">Informacje o darczyncach - nadawcach przelewow z darowiznami. Jeden darczynca moze miec wiele kont z ktorych wplaca darowizny.</value>
+    </entry>
     <entry>
       <key>TableType</key>
       <value class="oracle.javatools.db.Table$TableType">NORMAL</value>

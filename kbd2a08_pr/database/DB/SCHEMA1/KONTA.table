@@ -16,6 +16,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Klucz sztuczny.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>NR_KONTA</name>
@@ -31,6 +37,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Maksymalnie 26 cyfr. Numer rachunku bankowego bez spacji. Numery kont nie moga sie powtarzac.  </value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>TYP_WLASCICIELA</name>
@@ -60,7 +72,13 @@
           <typeName>DATE</typeName>
         </dataTypeID>
       </dataTypeUsage>
-      <notNull>true</notNull>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Data zalozenia konta ktore nalezy do fundacji. Jesli konto nalezy do darczyny - wartosc NULL</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>OPIS</name>
@@ -97,34 +115,34 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Jesli konto nalezy do darczyncy - wskazanie na darczynce, w przeciwnym przypadku wartosc NULL</value>
+        </entry>
+      </properties>
     </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>KONT_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>ID_KONTA</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>KONTA</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_DATA_ZAL_CK</name>
+      <checkCondition>(TYP_WLASCICIELA = &apos;F&apos; AND DATA_ZALOZENIA IS NOT NULL) OR (TYP_WLASCICIELA = &apos;D&apos; AND DATA_ZALOZENIA IS NULL)</checkCondition>
       <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>KONT_PK_IDX</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>KONTA</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_ID_DARCZYNCY_CK</name>
+      <checkCondition>(TYP_WLASCICIELA = &apos;F&apos; AND ID_DARCZYNCY IS NULL) OR (TYP_WLASCICIELA = &apos;D&apos; AND ID_DARCZYNCY IS NOT NULL)</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_NR_KONTA_CK</name>
+      <checkCondition>REGEXP_LIKE(NR_KONTA, &apos;^\d{26}$&apos;)</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>KONT_TYP_CK</name>
+      <checkCondition>TYP_WLASCICIELA IN (&apos;F&apos;, &apos;D&apos;)</checkCondition>
+      <enabled>true</enabled>
     </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
       <name>KONT_DARCZ_FK</name>
@@ -152,10 +170,57 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>KONT_TYP_CK</name>
-      <checkCondition>TYP_WLASCICIELA IN (&apos;F&apos;, &apos;D&apos;)</checkCondition>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>KONT_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>ID_KONTA</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>KONTA</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
       <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>KONT_PK_IDX</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>KONTA</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
+    </constraint>
+    <constraint class="oracle.javatools.db.UniqueConstraint">
+      <name>KONT_NR_KONTA_UK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>NR_KONTA</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>KONTA</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>KONT_NR_KONTA_UK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>KONTA</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
     </constraint>
   </constraints>
   <indexes>
@@ -173,6 +238,20 @@
       <systemGenerated>false</systemGenerated>
     </index>
     <index>
+      <name>KONT_NR_KONTA_UK</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>NR_KONTA</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>UNIQUE</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>true</systemGenerated>
+    </index>
+    <index>
       <name>KONT_PK_IDX</name>
       <columnExpressions>
         <columnExpression>
@@ -188,6 +267,10 @@
     </index>
   </indexes>
   <properties>
+    <entry>
+      <key>Comment</key>
+      <value class="java.lang.String">Informacje o kontach fundacji oraz wplacajacych darowizny. W przypadku konta fundacji - przypisani sa do niego podopieczni. W przypadku konta darczyncy - przypisany jest darczynca</value>
+    </entry>
     <entry>
       <key>TableType</key>
       <value class="oracle.javatools.db.Table$TableType">NORMAL</value>

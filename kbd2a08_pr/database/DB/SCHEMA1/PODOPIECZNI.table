@@ -37,6 +37,10 @@
           <key>ColumnSequenceExpander.TriggerNullCheck</key>
           <value class="java.lang.Boolean">true</value>
         </entry>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Klucz sztuczny.</value>
+        </entry>
       </properties>
     </column>
     <column>
@@ -132,6 +136,12 @@
         </dataTypeID>
       </dataTypeUsage>
       <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Email podopiecznego; musi byc unikalny w ramach podopiecznych zarejestrowanych w bazie danych.</value>
+        </entry>
+      </properties>
     </column>
     <column>
       <name>UWAGI</name>
@@ -150,7 +160,7 @@
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">Opcjonalne, dodatkowe informacje.</value>
+          <value class="java.lang.String">Opcjonalne, dodatkowe informacje. Maksymalnie 1000 znaków.</value>
         </entry>
       </properties>
     </column>
@@ -284,6 +294,10 @@
     </index>
   </indexes>
   <properties>
+    <entry>
+      <key>Comment</key>
+      <value class="java.lang.String">Informacje o podopiecznym dla ktorego zbierane sa darowizny. Kazdy podopieczny ma przypisane konto na ktore trafiaja przeznaczone dla niego darowizny.</value>
+    </entry>
     <entry>
       <key>TableType</key>
       <value class="oracle.javatools.db.Table$TableType">NORMAL</value>

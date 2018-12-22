@@ -23,6 +23,9 @@ JOIN (
 ON knd.ID_KONTA = o.ID_KONTA_NADAWCY;
 /
 
+COMMENT ON TABLE OPER_BANK_VIEW IS 'Perspektywa sluzaca do wyswietlania oraz wprowadzania operacji bankowych. Dane pochodza z trzech tabel: OPERACJE_BANKOWE, KONTA oraz DARCZYNCY. W przypadku wprowadzania danych, wyzwalacz OPER_BANK_VIEW_INSERT_TRG zapewnia jednoznaczne rozdystrybuowanie danych do tabel zrodlowych (zob. komentarz w kodzie wyzwalacza).';
+
+
 CREATE OR REPLACE VIEW DAROWIZNY_DLA_PODOP_VIEW (
     "DATA OPERACJI",
     TYTUL,
@@ -33,6 +36,8 @@ SELECT O.DATA_OPERACJI, O.TYTUL, O.KWOTA, NVL2(O.ID_PODOP, P.IMIE||' '||P.NAZWIS
 FROM OPERACJE_BANKOWE O
 LEFT JOIN PODOPIECZNI P ON O.ID_PODOP = P.ID_PODOP;
 /
+
+COMMENT ON TABLE DAROWIZNY_DLA_PODOP_VIEW IS 'Lista operacji z imieniem i nazwiskiem podopiecznego. Jesli operacja nie jest przypisana do zadnego podopiecznego to zamiast nazwiska zwracane jest ''brak przypisania''.';
 
 
 DROP MATERIALIZED VIEW LOG ON OPERACJE_BANKOWE;
@@ -50,6 +55,9 @@ FROM OPERACJE_BANKOWE O
 JOIN PODOPIECZNI P ON O.ID_PODOP = P.ID_PODOP
 GROUP BY P.ID_PODOP, P.EMAIL, P.IMIE, P.NAZWISKO, EXTRACT(YEAR FROM O.DATA_OPERACJI), EXTRACT(MONTH FROM O.DATA_OPERACJI);
 /
+
+COMMENT ON TABLE SUMY_DAROWIZN_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sume wplaconych darowizn dla kazdego podopiecznego, z podzialem na lata i miesiace. Wymaga recznego odswiezenia.';
+
 
 CREATE MATERIALIZED VIEW LOG ON OPERACJE_BANKOWE 
 WITH PRIMARY KEY 
@@ -69,3 +77,5 @@ JOIN KONTA K ON K.ID_DARCZYNCY = d.id_darczyncy
 JOIN OPERACJE_BANKOWE O ON O.ID_KONTA_NADAWCY = K.ID_KONTA
 GROUP BY D.ID_DARCZYNCY, D.NAZWA, D.EMAIL;
 /
+
+COMMENT ON TABLE WPLATY_DARCZYNCOW_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sumy darowizn wplaconych przez poszczegolnych darczyncow.';

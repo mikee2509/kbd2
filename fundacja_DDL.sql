@@ -276,6 +276,11 @@ ADD CONSTRAINT PODOP_STAT_CK CHECK
 (STATUS IN ('A', 'N'))
 ENABLE;
 
+ALTER TABLE SLOWA_KLUCZOWE
+ADD CONSTRAINT SL_KL_WARTOSC_UPPER_CK CHECK 
+(WARTOSC = UPPER(WARTOSC))
+ENABLE;
+
 COMMENT ON TABLE DARCZYNCY IS 'Informacje o darczyncach - nadawcach przelewow z darowiznami. Jeden darczynca moze miec wiele kont z ktorych wplaca darowizny.';
 
 COMMENT ON TABLE KONTA IS 'Informacje o kontach fundacji oraz wplacajacych darowizny. W przypadku konta fundacji - przypisani sa do niego podopieczni. W przypadku konta darczyncy - przypisany jest darczynca';
@@ -336,7 +341,7 @@ COMMENT ON COLUMN PODOPIECZNI.UWAGI IS 'Opcjonalne, dodatkowe informacje. Maksym
 
 COMMENT ON COLUMN SLOWA_KLUCZOWE.ID_SLOWA_KL IS 'Klucz sztuczny.';
 
-COMMENT ON COLUMN SLOWA_KLUCZOWE.WARTOSC IS 'Wartosc ktora szukana jest w tytule operacji. Maksymalnie 200 znakow.';
+COMMENT ON COLUMN SLOWA_KLUCZOWE.WARTOSC IS 'Wartosc ktora szukana jest w tytule operacji. Tylko duze litery. Maksymalnie 200 znakow.';
 
 COMMENT ON COLUMN SLOWA_KLUCZOWE.OPIS IS 'Maksymalnie 500 znakow.';
 

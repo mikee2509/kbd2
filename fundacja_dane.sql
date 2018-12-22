@@ -29,19 +29,19 @@ commit;
 
 --slowa kluczowe
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
-VALUES('Drozd', 'po nazwisku', 1);
+VALUES('DROZD', 'po nazwisku', 1);
 
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
-VALUES('Nowak', 'po nazwisku', 2);
+VALUES('NOWAK', 'po nazwisku', 2);
 
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
-VALUES('Wanna', 'po nazwisku', 3);
+VALUES('WANNA', 'po nazwisku', 3);
 
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
-VALUES('Kowalski', 'po nazwisku', 4);
+VALUES('KOWALSKI', 'po nazwisku', 4);
 
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
-VALUES('zbiórka nr 1234', 'zbiórka 1234 na kiermaszu świątecznym 12.12.2018r.', 4);
+VALUES('ZBIÓRKA NR 1234', 'zbiórka 1234 na kiermaszu świątecznym 12.12.2018r.', 4);
 commit;
 
 

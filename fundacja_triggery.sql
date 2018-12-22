@@ -1,4 +1,4 @@
-create or replace TRIGGER przypisz_konto
+create or replace TRIGGER przypisz_konto_trg
 -- Znajduje konto z najmniejsza liczba przypisanych podopiecznych
 -- i przypisuje nowego podopiecznego do tego konta
 BEFORE INSERT
@@ -12,7 +12,7 @@ BEGIN
     	(SELECT K.ID_KONTA FROM KONTA K LEFT JOIN PODOPIECZNI P ON P.ID_KONTA = K.ID_KONTA group by K.ID_KONTA ORDER BY COUNT(P.ID_PODOP) ASC)
 	WHERE ROWNUM = 1;    
 END;
-
+/
 
 create or replace TRIGGER oper_bank_view_insert_trg
 INSTEAD OF INSERT ON oper_bank_view
@@ -42,22 +42,31 @@ BEGIN
     INSERT INTO OPERACJE_BANKOWE (KWOTA, DATA_OPERACJI, ID_KONTA_NADAWCY, ID_KONTA_ODBIORCY, TYTUL)
     VALUES(:NEW.KWOTA, :NEW.DATA_OPERACJI, id_konta_nadawcy, id_konta_odbiorcy, :NEW.TYTUL);
 END;
+/
 
 
-
-CREATE OR REPLACE TRIGGER PRZYPISZ_OP_DO_PODOP_TRG
+create or replace TRIGGER PRZYPISZ_OP_DO_PODOP_TRG
 -- podejmuje probe przypisania operacji do podopiecznego
 -- na podstawie zdefiniowanych slow kluczowych
+-- rozpatrywane sa tylko slowa kluczowe podopiecznych zwiazanych
+-- z danym rachunkiem
 BEFORE INSERT
-	ON OPERACJE_BANKOWE
+    ON OPERACJE_BANKOWE
 FOR EACH ROW 
 WHEN (NEW.ID_PODOP IS NULL)
 BEGIN
-
-    SELECT ID_SLOWA_KL, ID_PODOP INTO :NEW.ID_SLOWA_KL, :NEW.ID_PODOP 
-    --FROM SLOWA_KLUCZOWE WHERE REGEXP_LIKE (:NEW.TYTUL, WARTOSC);
-    FROM SLOWA_KLUCZOWE WHERE INSTR(:NEW.TYTUL, WARTOSC) > 0        
-    JOIN PODOPIECZNI P ON P.ID_KONTA = :NEW.ID_KONTA_ODBIORCY; -- TODO sprawdzic - chodzi o to, zeby szukac tylko w ramach slow kluczowych dla tego konta
-
+    BEGIN
+        SELECT S.ID_PODOP, MIN(S.ID_SLOWA_KL) INTO :NEW.ID_PODOP, :NEW.ID_SLOWA_KL        
+        --FROM SLOWA_KLUCZOWE WHERE REGEXP_LIKE (:NEW.TYTUL, WARTOSC);
+        FROM SLOWA_KLUCZOWE S        
+        JOIN PODOPIECZNI P ON S.ID_PODOP = P.ID_PODOP
+        WHERE P.ID_KONTA = :NEW.ID_KONTA_ODBIORCY AND INSTR(UPPER(:NEW.TYTUL), WARTOSC) > 0
+        GROUP BY S.ID_PODOP;
+    EXCEPTION
+        WHEN TOO_MANY_ROWS THEN
+        -- niepowodzenie dopasowania pojedynczego podopiecznego na podstawie
+        -- slow kluczowych - zaden podopieczny nie zostaje przypisany,
+        -- konieczne reczne przypisania
+        NULL;
+    END;    
 END;
-/

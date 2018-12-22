@@ -70,3 +70,22 @@ BEGIN
         NULL;
     END;    
 END;
+/
+
+
+CREATE OR REPLACE TRIGGER fkntm_op_bank_nadawca_trg BEFORE
+    UPDATE OF id_konta_nadawcy ON operacje_bankowe FOR EACH ROW
+    WHEN (new.id_konta_nadawcy <> old.id_konta_nadawcy)
+BEGIN
+    raise_application_error(-20225,'Non Transferable FK constraint on table OPERACJE_BANKOWE is violated');
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER fkntm_op_bank_odbiorca_trg BEFORE
+    UPDATE OF id_konta_odbiorcy ON operacje_bankowe FOR EACH ROW
+    WHEN (new.id_konta_odbiorcy <> old.id_konta_odbiorcy)
+BEGIN
+    raise_application_error(-20225,'Non Transferable FK constraint on table OPERACJE_BANKOWE is violated');
+END;
+/

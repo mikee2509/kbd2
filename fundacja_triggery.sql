@@ -1,16 +1,21 @@
-create or replace TRIGGER przypisz_konto_trg
+CREATE OR REPLACE TRIGGER PRZYPISZ_KONTO_TRG
 -- Znajduje konto z najmniejsza liczba przypisanych podopiecznych
 -- i przypisuje nowego podopiecznego do tego konta
 BEFORE INSERT
-	ON PODOPIECZNI
+    ON PODOPIECZNI
 FOR EACH ROW 
 WHEN (NEW.ID_KONTA IS NULL) 
 BEGIN
     SELECT ID_KONTA
     INTO :NEW.ID_KONTA
     FROM 
-    	(SELECT K.ID_KONTA FROM KONTA K LEFT JOIN PODOPIECZNI P ON P.ID_KONTA = K.ID_KONTA group by K.ID_KONTA ORDER BY COUNT(P.ID_PODOP) ASC)
-	WHERE ROWNUM = 1;    
+        (
+            SELECT K.ID_KONTA
+            FROM KONTA K LEFT JOIN PODOPIECZNI P ON P.ID_KONTA = K.ID_KONTA
+            WHERE TYP_WLASCICIELA = 'F'
+            GROUP BY K.ID_KONTA ORDER BY COUNT(P.ID_PODOP) ASC
+        )
+    WHERE ROWNUM = 1;    
 END;
 /
 

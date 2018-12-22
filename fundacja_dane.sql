@@ -10,24 +10,29 @@ VALUES ('10000000000000000000000003', 'F', '18/07/30', 'trzecie konto');
 commit;
 
 
+
 -- podopieczni
--- automatyczne przypisanie konta
-INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL)
-VALUES ('Drozd', 'Jan', 'jan.drozd@poczta.com');
-
-INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL)
-VALUES ('Nowak', 'Stefan', 'stefan.nowak@poczta.com');
-
-INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL)
-VALUES ('Wanna', 'Hanna', 'hanna.wanna@poczta.com');
-
 -- reczne przypisanie konta
 INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL, ID_KONTA)
-VALUES ('Kowalski', 'Andrzej', 'andrzej.kowalski@poczta.com', 1);
+VALUES ('Drozd', 'Jan', 'jan.drozd@poczta.com', 1);
+
+INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL, ID_KONTA)
+VALUES ('Nowak', 'Stefan', 'stefan.nowak@poczta.com', 2);
+
+INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL, ID_KONTA)
+VALUES ('Wanna', 'Hanna', 'hanna.wanna@poczta.com', 3);
+
+INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL, ID_KONTA)
+VALUES ('Karol', 'Opolski', 'karol.opolski@poczta.com', 3);
+
+-- automatyczne przypisanie konta
+INSERT INTO PODOPIECZNI (NAZWISKO, IMIE, EMAIL)
+VALUES ('Kowalski', 'Andrzej', 'andrzej.kowalski@poczta.com');
 commit;
 
 
---slowa kluczowe
+
+-- slowa kluczowe
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
 VALUES('DROZD', 'po nazwisku', 1);
 
@@ -38,42 +43,105 @@ INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
 VALUES('WANNA', 'po nazwisku', 3);
 
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
-VALUES('KOWALSKI', 'po nazwisku', 4);
+VALUES('OPOLSKI', 'po nazwisku', 4);
 
 INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
-VALUES('ZBIÓRKA NR 1234', 'zbiórka 1234 na kiermaszu świątecznym 12.12.2018r.', 4);
+VALUES('KOWALSKI', 'po nazwisku', 5);
+
+INSERT INTO SLOWA_KLUCZOWE (WARTOSC, OPIS, ID_PODOP)
+VALUES('ZBIÓRKA NR 1234', 'zbiórka 1234 na kiermaszu świątecznym 12.12.2018r.', 5);
+commit;
+
+
+
+-- operacje bankowe (darowizny)
+INSERT INTO oper_bank_view(
+    NAZWA_NADAWCY, 
+    NR_KONTA_NADAWCY, 
+    NR_KONTA_ODBIORCY,
+    KWOTA, 
+    TYTUL, 
+    DATA_OPERACJI
+) VALUES(
+    'Zdzisław Wiśniewski',
+    '40000000000000000000000001',
+    '10000000000000000000000003',
+    14.00,
+    'darowizna OPOLSKI',
+    TO_DATE('15-06-2018', 'DD-MM-YYYY')
+);
+
+INSERT INTO oper_bank_view(
+    NAZWA_NADAWCY, 
+    NR_KONTA_NADAWCY, 
+    NR_KONTA_ODBIORCY,
+    KWOTA, 
+    TYTUL, 
+    DATA_OPERACJI
+) VALUES(
+    'Zdzisław W',
+    '40000000000000000000000001',
+    '10000000000000000000000003',
+    35.00,
+    'darowizna WANNA',
+    TO_DATE('16-06-2018', 'DD-MM-YYYY')
+);
+
+INSERT INTO oper_bank_view(
+    NAZWA_NADAWCY, 
+    NR_KONTA_NADAWCY, 
+    NR_KONTA_ODBIORCY,
+    KWOTA, 
+    TYTUL, 
+    DATA_OPERACJI
+) VALUES(
+    'Zdzisław W',
+    '40000000000000000000000001',
+    '10000000000000000000000003',
+    35.00,
+    'darowizna WANNA',
+    TO_DATE('17-06-2018', 'DD-MM-YYYY')
+);
+
+-- TEST ta operacja nie powinna zostać automatycznie przypisana
+-- ze wezgledu na 2 slowa kluczowe w tytule dla roznych osob
+INSERT INTO oper_bank_view(
+    NAZWA_NADAWCY, 
+    NR_KONTA_NADAWCY, 
+    NR_KONTA_ODBIORCY,
+    KWOTA, 
+    TYTUL, 
+    DATA_OPERACJI
+) VALUES(
+    'Zdzisław W',
+    '40000000000000000000000001',
+    '10000000000000000000000003',
+    35.00,
+    'darowizna WANNA i OPOLSKI',
+    TO_DATE('17-06-2018', 'DD-MM-YYYY')
+);
+
 commit;
 
 
 
 
-------------------------------
--- drafts - remove
-
--- darczyncy
-INSERT INTO DARCZYNCY (NAZWA, EMAIL) VALUES ('Konrad Wiśniewski', 'k.wisn@poczta.com');
-
--- konta darczyncow
-INSERT INTO KONTA (NR_KONTA, TYP_WLASCICIELA, ID_DARCZYNCY)
-VALUES ('40000000000000000000000001', 'D', 1);
-
-
-INSERT INTO OPERACJE_BANKOWE (KWOTA, DATA_OPERACJI, ID_KONTA_NADAWCY, ID_KONTA_ODBIORCY, ID_PODOP, TYTUL)
-VALUES (12.60, current_timestamp, 4, 1, 4 , 'jakas wplata')
 
 
 
 
 
+-- inne testowe TODO
 
 
 
-
--- brak id darczyncy
+-- TEST brak id darczyncy i data zalozenia != null
 INSERT INTO KONTA (NR_KONTA, TYP_WLASCICIELA, DATA_ZALOZENIA, OPIS)
 VALUES ('10000000000000000000002000', 'D', '17/06/20', 'pierwsze konto')
 
--- data zalozenia powinna byc null
+-- TEST data zalozenia powinna byc null
+INSERT INTO KONTA (NR_KONTA, TYP_WLASCICIELA, DATA_ZALOZENIA, OPIS, ID_DARCZYNCY)
+VALUES ('10000000000000000000002000', 'D', '17/06/20', 'jakies konto', 1)
 
 
 

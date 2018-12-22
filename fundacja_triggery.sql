@@ -15,6 +15,10 @@ END;
 /
 
 create or replace TRIGGER oper_bank_view_insert_trg
+-- Wyzwalacz uruchamiany przy dodawaniu danych za pomoca perspektywy OPER_BANK_VIEW
+-- Sprawdza czy NR_KONTA_ODBIORCY jest numerem konta nalezacym do fundacji.
+-- Na podstawie NR_KONTA_NADAWCY przypisuje operacje do istniejacego darczyncy  
+-- lub jesli nie istnieje - tworzy nowego darczynce zapamietujac jego nazwe.
 INSTEAD OF INSERT ON oper_bank_view
 DECLARE
     id_konta_nadawcy KONTA.NR_KONTA%TYPE;

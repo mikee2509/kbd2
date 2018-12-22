@@ -337,7 +337,7 @@ COMMENT ON COLUMN PODOPIECZNI.STATUS IS 'Wartosc ''A'' (aktywny) lub ''N'' (niea
 
 COMMENT ON COLUMN PODOPIECZNI.EMAIL IS 'Email podopiecznego; musi byc unikalny w ramach podopiecznych zarejestrowanych w bazie danych.';
 
-COMMENT ON COLUMN PODOPIECZNI.UWAGI IS 'Opcjonalne, dodatkowe informacje. Maksymalnie 1000 znaków.';
+COMMENT ON COLUMN PODOPIECZNI.UWAGI IS 'Opcjonalne, dodatkowe informacje. Maksymalnie 1000 znakow.';
 
 COMMENT ON COLUMN SLOWA_KLUCZOWE.ID_SLOWA_KL IS 'Klucz sztuczny.';
 

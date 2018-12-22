@@ -351,7 +351,9 @@ COMMENT ON TABLE OPER_BANK_VIEW IS 'Perspektywa sluzaca do wyswietlania oraz wpr
 
 COMMENT ON TABLE DAROWIZNY_DLA_PODOP_VIEW IS 'Lista operacji z imieniem i nazwiskiem podopiecznego. Jesli operacja nie jest przypisana do zadnego podopiecznego to zamiast nazwiska zwracane jest ''brak przypisania''.';
 
-COMMENT ON TABLE SUMY_DAROWIZN_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sume wplaconych darowizn dla kazdego podopiecznego, z podzialem na lata i miesiace. Wymaga recznego odswiezenia.'
+COMMENT ON TABLE SUMY_DAROWIZN_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sume wplaconych darowizn dla kazdego podopiecznego, z podzialem na lata i miesiace. Wymaga recznego odswiezenia.';
+
+COMMENT ON TABLE WPLATY_DARCZYNCOW_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sumy darowizn wplaconych przez poszczegolnych darczyncow.';
 
 CREATE SEQUENCE ID_DARCZYNCY_SEQ INCREMENT BY 1 START WITH 1 ORDER;
 

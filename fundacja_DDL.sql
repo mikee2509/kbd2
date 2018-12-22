@@ -347,6 +347,8 @@ COMMENT ON COLUMN SLOWA_KLUCZOWE.OPIS IS 'Maksymalnie 500 znakow.';
 
 COMMENT ON COLUMN SLOWA_KLUCZOWE.ID_PODOP IS 'Podopieczny do ktorego nalezy dane slowo kluczowe.';
 
+COMMENT ON TABLE OPER_BANK_VIEW IS 'Perspektywa sluzaca do wyswietlania oraz wprowadzania operacji bankowych. Dane pochodza z trzech tabel: OPERACJE_BANKOWE, KONTA oraz DARCZYNCY. W przypadku wprowadzania danych, wyzwalacz OPER_BANK_VIEW_INSERT_TRG zapewnia jednoznaczne rozdystrybuowanie danych do tabel zrodlowych (zob. komentarz w kodzie wyzwalacza).';
+
 CREATE SEQUENCE ID_DARCZYNCY_SEQ INCREMENT BY 1 START WITH 1 ORDER;
 
 CREATE SEQUENCE ID_KONTA_SEQ INCREMENT BY 1 START WITH 1 ORDER;

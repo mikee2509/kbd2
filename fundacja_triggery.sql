@@ -89,3 +89,21 @@ BEGIN
     raise_application_error(-20225,'Non Transferable FK constraint on table OPERACJE_BANKOWE is violated');
 END;
 /
+
+
+CREATE OR REPLACE TRIGGER fkntm_slowa_kl_podop_trg BEFORE
+    UPDATE OF id_podop ON slowa_kluczowe FOR EACH ROW
+    WHEN (new.id_podop <> old.id_podop)
+BEGIN
+    raise_application_error(-20225,'Non Transferable FK constraint on table SLOWA_KLUCZOWE is violated');
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER fkntm_op_bank_sl_kl_trg BEFORE
+    UPDATE OF id_slowa_kl ON operacje_bankowe FOR EACH ROW
+    WHEN (new.id_slowa_kl <> old.id_slowa_kl AND new.id_slowa_kl <> NULL)
+BEGIN
+    raise_application_error(-20225,'Non Transferable FK constraint on table OPERACJE_BANKOWE is violated');
+END;
+/

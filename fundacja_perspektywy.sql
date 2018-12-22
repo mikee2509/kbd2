@@ -38,7 +38,7 @@ FROM OPERACJE_BANKOWE O
 LEFT JOIN PODOPIECZNI P ON O.ID_PODOP = P.ID_PODOP;
 /
 
-COMMENT ON TABLE DAROWIZNY_DLA_PODOP_VIEW IS 'Lista operacji z imieniem i nazwiskiem podopiecznego. Jesli operacja nie jest przypisana do zadnego podopiecznego to zamiast nazwiska zwracane jest ''brak przypisania''.';
+COMMENT ON MATERIALIZED VIEW DAROWIZNY_DLA_PODOP_VIEW IS 'Lista operacji z imieniem i nazwiskiem podopiecznego. Jesli operacja nie jest przypisana do zadnego podopiecznego to zamiast nazwiska zwracane jest ''brak przypisania''.';
 
 
 DROP MATERIALIZED VIEW LOG ON OPERACJE_BANKOWE;
@@ -57,7 +57,7 @@ JOIN PODOPIECZNI P ON O.ID_PODOP = P.ID_PODOP
 GROUP BY P.ID_PODOP, P.EMAIL, P.IMIE, P.NAZWISKO, EXTRACT(YEAR FROM O.DATA_OPERACJI), EXTRACT(MONTH FROM O.DATA_OPERACJI);
 /
 
-COMMENT ON TABLE SUMY_DAROWIZN_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sume wplaconych darowizn dla kazdego podopiecznego, z podzialem na lata i miesiace. Wymaga recznego odswiezenia.';
+COMMENT ON MATERIALIZED VIEW SUMY_DAROWIZN_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sume wplaconych darowizn dla kazdego podopiecznego, z podzialem na lata i miesiace. Wymaga recznego odswiezenia.';
 
 
 CREATE MATERIALIZED VIEW LOG ON OPERACJE_BANKOWE 
@@ -79,4 +79,4 @@ JOIN OPERACJE_BANKOWE O ON O.ID_KONTA_NADAWCY = K.ID_KONTA
 GROUP BY D.ID_DARCZYNCY, D.NAZWA, D.EMAIL;
 /
 
-COMMENT ON TABLE WPLATY_DARCZYNCOW_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sumy darowizn wplaconych przez poszczegolnych darczyncow.';
+COMMENT ON MATERIALIZED VIEW WPLATY_DARCZYNCOW_MVIEW IS 'Perspektywa zmaterializowana wyswietlajaca sumy darowizn wplaconych przez poszczegolnych darczyncow.';

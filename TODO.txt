@@ -1,4 +1,0 @@
- - poprawić id_podop
- - odświeżanie perspektywy co jakiś czas
- - web
- - "Procedury, funkcje i pakiety PL/SQL, zastosowane w aplikacji lub w wyzwalaczach." [Zalecane]

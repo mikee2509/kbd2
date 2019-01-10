@@ -15,19 +15,19 @@ wwv_flow_api.import_begin (
  p_version_yyyy_mm_dd=>'2013.01.01'
 ,p_release=>'5.0.4.00.12'
 ,p_default_workspace_id=>1746078565454662
-,p_default_application_id=>110
+,p_default_application_id=>109
 ,p_default_owner=>'KBD2A08'
 );
 end;
 /
 prompt --application/set_environment
  
-prompt APPLICATION 110 - kbd2a08_app
+prompt APPLICATION 109 - kbd2a08_app
 --
 -- Application Export:
---   Application:     110
+--   Application:     109
 --   Name:            kbd2a08_app
---   Date and Time:   22:55 Saturday December 22, 2018
+--   Date and Time:   12:44 Wednesday January 9, 2019
 --   Exported By:     BARTOSZ
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -83,10 +83,10 @@ prompt --application/create_application
 begin
 wwv_flow_api.create_flow(
  p_id=>wwv_flow.g_flow_id
-,p_display_id=>nvl(wwv_flow_application_install.get_application_id,110)
+,p_display_id=>nvl(wwv_flow_application_install.get_application_id,109)
 ,p_owner=>nvl(wwv_flow_application_install.get_schema,'KBD2A08')
 ,p_name=>nvl(wwv_flow_application_install.get_application_name,'kbd2a08_app')
-,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'F_110')
+,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'F_109')
 ,p_page_view_logging=>'YES'
 ,p_page_protection_enabled_y_n=>'Y'
 ,p_checksum_salt=>'481E16B169E87295042F133F2EB85BF3B3D3753F2F9F85DFE5DD036030EBC6FA'
@@ -7795,7 +7795,7 @@ wwv_flow_api.create_report_region(
 ,p_component_template_options=>'#DEFAULT#:t-Report--altRowsDefault:t-Report--rowHighlight'
 ,p_display_point=>'BODY'
 ,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select PODOPIECZNI.ID_PODOPIECZNEGO as ID_PODOPIECZNEGO,',
+'select PODOPIECZNI.ID_PODOP as ID_PODOP,',
 '    PODOPIECZNI.NAZWISKO as NAZWISKO,',
 '    PODOPIECZNI.IMIE as IMIE,',
 '    PODOPIECZNI.STATUS as STATUS,',
@@ -7805,7 +7805,7 @@ wwv_flow_api.create_report_region(
 ' from KONTA KONTA,',
 '    PODOPIECZNI PODOPIECZNI ',
 ' where PODOPIECZNI.ID_KONTA=KONTA.ID_KONTA',
-'order by id_podopiecznego'))
+'order by id_podop'))
 ,p_source_type=>'NATIVE_SQL_REPORT'
 ,p_ajax_enabled=>'N'
 ,p_query_row_template=>wwv_flow_api.id(2470223087760302)
@@ -7819,9 +7819,9 @@ wwv_flow_api.create_report_region(
 wwv_flow_api.create_report_columns(
  p_id=>wwv_flow_api.id(2613551011094674)
 ,p_query_column_id=>1
-,p_column_alias=>'ID_PODOPIECZNEGO'
+,p_column_alias=>'ID_PODOP'
 ,p_column_display_sequence=>1
-,p_column_link=>'f?p=#APP_ID#:3:#APP_SESSION#:::RP:P3_ID_PODOPIECZNEGO:#ID_PODOPIECZNEGO#'
+,p_column_link=>'f?p=#APP_ID#:3:#APP_SESSION#:::RP:P3_ID_PODOP:#ID_PODOP#'
 ,p_column_linktext=>'<img src="#IMAGE_PREFIX#app_ui/img/icons/apex-edit-pencil.png" class="apex-edit-pencil" alt="Edit">'
 ,p_derived_column=>'N'
 ,p_include_in_export=>'Y'
@@ -7901,7 +7901,7 @@ wwv_flow_api.create_page_button(
 wwv_flow_api.create_page_computation(
  p_id=>wwv_flow_api.id(2619289875094701)
 ,p_computation_sequence=>1
-,p_computation_item=>'P3_ID_PODOPIECZNEGO'
+,p_computation_item=>'P3_ID_PODOP'
 ,p_computation_type=>'STATIC_ASSIGNMENT'
 ,p_compute_when=>'CREATE'
 ,p_compute_when_type=>'REQUEST_EQUALS_CONDITION'
@@ -7956,17 +7956,17 @@ wwv_flow_api.create_report_region(
 ,p_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select ',
 '"ID_SLOWA_KL",',
-'"ID_PODOPIECZNEGO",',
+'"ID_PODOP",',
 '"WARTOSC",',
 '"OPIS"',
 'from "#OWNER#"."SLOWA_KLUCZOWE"',
-'where "ID_PODOPIECZNEGO" = :P3_ID_PODOPIECZNEGO',
+'where "ID_PODOP" = :P3_ID_PODOP',
 ''))
 ,p_source_type=>'NATIVE_TABFORM'
-,p_display_when_condition=>'P3_ID_PODOPIECZNEGO'
+,p_display_when_condition=>'P3_ID_PODOP'
 ,p_display_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_ajax_enabled=>'Y'
-,p_ajax_items_to_submit=>'P3_ID_PODOPIECZNEGO'
+,p_ajax_items_to_submit=>'P3_ID_PODOP'
 ,p_query_row_template=>wwv_flow_api.id(2470223087760302)
 ,p_query_num_rows=>10
 ,p_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -8002,18 +8002,18 @@ wwv_flow_api.create_report_columns(
 wwv_flow_api.create_report_columns(
  p_id=>wwv_flow_api.id(2636539189094742)
 ,p_query_column_id=>3
-,p_column_alias=>'ID_PODOPIECZNEGO'
+,p_column_alias=>'ID_PODOP'
 ,p_column_display_sequence=>3
 ,p_column_heading=>'Id Podop'
 ,p_disable_sort_column=>'N'
 ,p_hidden_column=>'Y'
 ,p_display_as=>'HIDDEN'
 ,p_column_width=>16
-,p_column_default=>'P3_ID_PODOPIECZNEGO'
+,p_column_default=>'P3_ID_PODOP'
 ,p_column_default_type=>'ITEM'
 ,p_ref_schema=>'KBD2A08'
 ,p_ref_table_name=>'SLOWA_KLUCZOWE'
-,p_ref_column_name=>'ID_PODOPIECZNEGO'
+,p_ref_column_name=>'ID_PODOP'
 );
 wwv_flow_api.create_report_columns(
  p_id=>wwv_flow_api.id(2636906216094742)
@@ -8058,7 +8058,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Zapisz'
 ,p_button_position=>'REGION_TEMPLATE_CHANGE'
-,p_button_condition=>'P3_ID_PODOPIECZNEGO'
+,p_button_condition=>'P3_ID_PODOP'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_database_action=>'UPDATE'
 );
@@ -8079,14 +8079,14 @@ wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(2627312471094726)
 ,p_button_sequence=>50
 ,p_button_plug_id=>wwv_flow_api.id(2620277702094703)
-,p_button_name=>'GET_PREVIOUS_ID_PODOPIECZNEGO'
+,p_button_name=>'GET_PREVIOUS_ID_PODOP'
 ,p_button_action=>'REDIRECT_URL'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_api.id(2482323169760335)
 ,p_button_image_alt=>'Poprzedni'
 ,p_button_position=>'REGION_TEMPLATE_CHANGE'
-,p_button_redirect_url=>'javascript:htmldb_goSubmit(''GET_PREVIOUS_ID_PODOPIECZNEGO'')'
-,p_button_condition=>'P3_ID_PODOPIECZNEGO_PREV'
+,p_button_redirect_url=>'javascript:htmldb_goSubmit(''GET_PREVIOUS_ID_PODOP'')'
+,p_button_condition=>'P3_ID_PODOP_PREV'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_icon_css_classes=>'fa-chevron-left'
 ,p_button_comment=>'This button is needed for Get Next or Previous Primary Key Value process.'
@@ -8095,14 +8095,14 @@ wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(2627217083094726)
 ,p_button_sequence=>60
 ,p_button_plug_id=>wwv_flow_api.id(2620277702094703)
-,p_button_name=>'GET_NEXT_ID_PODOPIECZNEGO'
+,p_button_name=>'GET_NEXT_ID_PODOP'
 ,p_button_action=>'REDIRECT_URL'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_api.id(2482323169760335)
 ,p_button_image_alt=>'Następny'
 ,p_button_position=>'REGION_TEMPLATE_CHANGE'
-,p_button_redirect_url=>'javascript:htmldb_goSubmit(''GET_NEXT_ID_PODOPIECZNEGO'')'
-,p_button_condition=>'P3_ID_PODOPIECZNEGO_NEXT'
+,p_button_redirect_url=>'javascript:htmldb_goSubmit(''GET_NEXT_ID_PODOP'')'
+,p_button_condition=>'P3_ID_PODOP_NEXT'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_icon_css_classes=>'fa-chevron-right'
 ,p_button_comment=>'This button is needed for Get Next or Previous Primary Key Value process.'
@@ -8130,7 +8130,7 @@ wwv_flow_api.create_page_button(
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Create'
 ,p_button_position=>'REGION_TEMPLATE_CREATE'
-,p_button_condition=>'P3_ID_PODOPIECZNEGO'
+,p_button_condition=>'P3_ID_PODOP'
 ,p_button_condition_type=>'ITEM_IS_NULL'
 ,p_database_action=>'INSERT'
 );
@@ -8146,7 +8146,7 @@ wwv_flow_api.create_page_button(
 ,p_button_position=>'REGION_TEMPLATE_DELETE'
 ,p_button_redirect_url=>'javascript:apex.confirm(htmldb_delete_message,''DELETE'');'
 ,p_button_execute_validations=>'N'
-,p_button_condition=>'P3_ID_PODOPIECZNEGO'
+,p_button_condition=>'P3_ID_PODOP'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_database_action=>'DELETE'
 );
@@ -8165,7 +8165,7 @@ wwv_flow_api.create_page_button(
 ,p_button_condition=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select 1 ',
 'from "#OWNER#"."SLOWA_KLUCZOWE"',
-'where "ID_PODOPIECZNEGO" = :P3_ID_PODOPIECZNEGO'))
+'where "ID_PODOP" = :P3_ID_PODOP'))
 ,p_button_condition_type=>'EXISTS'
 );
 wwv_flow_api.create_page_branch(
@@ -8178,7 +8178,7 @@ wwv_flow_api.create_page_branch(
 );
 wwv_flow_api.create_page_branch(
  p_id=>wwv_flow_api.id(2632048172094735)
-,p_branch_action=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::P3_ID_PODOPIECZNEGO:&P3_ID_PODOPIECZNEGO_NEXT.&success_msg=#SUCCESS_MSG#'
+,p_branch_action=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::P3_ID_PODOP:&P3_ID_PODOP_NEXT.&success_msg=#SUCCESS_MSG#'
 ,p_branch_point=>'AFTER_PROCESSING'
 ,p_branch_type=>'REDIRECT_URL'
 ,p_branch_when_button_id=>wwv_flow_api.id(2627217083094726)
@@ -8187,7 +8187,7 @@ wwv_flow_api.create_page_branch(
 );
 wwv_flow_api.create_page_branch(
  p_id=>wwv_flow_api.id(2632428713094737)
-,p_branch_action=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::P3_ID_PODOPIECZNEGO:&P3_ID_PODOPIECZNEGO_PREV.&success_msg=#SUCCESS_MSG#'
+,p_branch_action=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.::P3_ID_PODOP:&P3_ID_PODOP_PREV.&success_msg=#SUCCESS_MSG#'
 ,p_branch_point=>'AFTER_PROCESSING'
 ,p_branch_type=>'REDIRECT_URL'
 ,p_branch_when_button_id=>wwv_flow_api.id(2627312471094726)
@@ -8205,12 +8205,12 @@ wwv_flow_api.create_page_branch(
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(2622545191094706)
-,p_name=>'P3_ID_PODOPIECZNEGO'
+,p_name=>'P3_ID_PODOP'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(2620277702094703)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Id Podop'
-,p_source=>'ID_PODOPIECZNEGO'
+,p_source=>'ID_PODOP'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_label_alignment=>'RIGHT'
@@ -8324,27 +8324,27 @@ wwv_flow_api.create_page_item(
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(2629828758094729)
-,p_name=>'P3_ID_PODOPIECZNEGO_NEXT'
+,p_name=>'P3_ID_PODOP_NEXT'
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_api.id(2620277702094703)
-,p_prompt=>'P3_ID_PODOPIECZNEGO_NEXT'
+,p_prompt=>'P3_ID_PODOP_NEXT'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 ,p_item_comment=>'This item is needed for Get Next or Previous Primary Key Value process.'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(2630289516094729)
-,p_name=>'P3_ID_PODOPIECZNEGO_PREV'
+,p_name=>'P3_ID_PODOP_PREV'
 ,p_item_sequence=>90
 ,p_item_plug_id=>wwv_flow_api.id(2620277702094703)
-,p_prompt=>'P3_ID_PODOPIECZNEGO_PREV'
+,p_prompt=>'P3_ID_PODOP_PREV'
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'N'
 ,p_item_comment=>'This item is needed for Get Next or Previous Primary Key Value process.'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(2630626017094734)
-,p_name=>'P3_ID_PODOPIECZNEGO_COUNT'
+,p_name=>'P3_ID_PODOP_COUNT'
 ,p_item_sequence=>100
 ,p_item_plug_id=>wwv_flow_api.id(2620277702094703)
 ,p_display_as=>'NATIVE_DISPLAY_ONLY'
@@ -8378,8 +8378,8 @@ wwv_flow_api.create_page_process(
 ,p_process_type=>'NATIVE_FORM_FETCH'
 ,p_process_name=>'Fetch Row from PODOPIECZNI'
 ,p_attribute_02=>'PODOPIECZNI'
-,p_attribute_03=>'P3_ID_PODOPIECZNEGO'
-,p_attribute_04=>'ID_PODOPIECZNEGO'
+,p_attribute_03=>'P3_ID_PODOP'
+,p_attribute_04=>'ID_PODOP'
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(2631635974094735)
@@ -8388,12 +8388,12 @@ wwv_flow_api.create_page_process(
 ,p_process_type=>'NATIVE_FORM_PAGINATION'
 ,p_process_name=>'Get Next or Previous Primary Key Value'
 ,p_attribute_02=>'PODOPIECZNI'
-,p_attribute_03=>'P3_ID_PODOPIECZNEGO'
-,p_attribute_04=>'ID_PODOPIECZNEGO'
-,p_attribute_07=>'ID_PODOPIECZNEGO'
-,p_attribute_09=>'P3_ID_PODOPIECZNEGO_NEXT'
-,p_attribute_10=>'P3_ID_PODOPIECZNEGO_PREV'
-,p_attribute_13=>'P3_ID_PODOPIECZNEGO_COUNT'
+,p_attribute_03=>'P3_ID_PODOP'
+,p_attribute_04=>'ID_PODOP'
+,p_attribute_07=>'ID_PODOP'
+,p_attribute_09=>'P3_ID_PODOP_NEXT'
+,p_attribute_10=>'P3_ID_PODOP_PREV'
+,p_attribute_13=>'P3_ID_PODOP_COUNT'
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(2626190268094723)
@@ -8402,8 +8402,8 @@ wwv_flow_api.create_page_process(
 ,p_process_type=>'NATIVE_FORM_PROCESS'
 ,p_process_name=>'Process Row of PODOPIECZNI'
 ,p_attribute_02=>'PODOPIECZNI'
-,p_attribute_03=>'P3_ID_PODOPIECZNEGO'
-,p_attribute_04=>'ID_PODOPIECZNEGO'
+,p_attribute_03=>'P3_ID_PODOP'
+,p_attribute_04=>'ID_PODOP'
 ,p_attribute_11=>'I:U:D'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_success_message=>'Action Processed.'

@@ -1,3 +1,0 @@
-- usunąć apex_old
-- (sprawdzić dlaczego jeden insert się wywala -> TODO w danych)
-- zapytać w mailu o schedulera

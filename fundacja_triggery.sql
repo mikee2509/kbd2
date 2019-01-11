@@ -75,7 +75,12 @@ BEGIN
         WHEN TOO_MANY_ROWS THEN
         -- niepowodzenie dopasowania pojedynczego podopiecznego na podstawie
         -- slow kluczowych - zaden podopieczny nie zostaje przypisany,
-        -- konieczne reczne przypisania
+        -- konieczne reczne przypisanie
+        NULL;
+        WHEN NO_DATA_FOUND THEN
+        -- nie istnieje slowo kluczowe pozwalajace na automatyczne przypisanie
+        -- zaden podopieczny nie zostaje przypisany,
+        -- konieczne reczne przypisanie
         NULL;
     END;    
 END;

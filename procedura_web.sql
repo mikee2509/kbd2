@@ -4,6 +4,7 @@ create or replace procedure startWWW(
 	-- Pokazywany jest rowniez formularz umozliwiajacy uruchomienie procedury z danymi podanymi przez
 	-- uzytkownika (miesiac (liczba 1-12), rok (4 cyfry)).
 	-- Domyslnie prezentuje dane dla biezacego miesiaca.
+    -- Przyklady parametrow: miesiac=6, rok=2018 lub miesiac=12 rok=2018 
 
 	miesiac in sumy_darowizn_mview.miesiac%TYPE default EXTRACT(MONTH FROM SYSDATE),
 	rok in sumy_darowizn_mview.rok%TYPE default EXTRACT(YEAR FROM SYSDATE)) as 
@@ -17,7 +18,7 @@ begin
 	htp.headclose;
 	htp.bodyopen;
 	htp.header(1, 'Sumy wpłat dla podopiecznych dla miesiąca ' || TO_CHAR(miesiac, '00') || '.' || rok);
-	htp.header(4, 'Tabela przedstawia sumy wpłat dla podopiecznych w miesiący podanym w formularzu. <br />Domyślnie dla bieżącego miesiąca.');
+	htp.header(4, 'Tabela przedstawia sumy wpłat dla podopiecznych w miesiącu podanym w formularzu. <br />Domyślnie dla bieżącego miesiąca. Inne przyklady: 06.2018 lub 12.2018');
 
 	htp.formopen(curl=>'',cmethod=>'GET');
 	htp.header(5,'Miesiąc (MM)');
@@ -30,7 +31,7 @@ begin
 	htp.formclose();
 
 	clause := 'where rok =' || rok || 'and miesiac =' || miesiac || 'order by id_podopiecznego';
-	
+
 	dummy := owa_util.tableprint(
 			ctable=>'sumy_darowizn_mview',
 			cattributes=>'border=1',
@@ -42,4 +43,3 @@ begin
 	htp.bodyclose;
 	htp.htmlclose;
 end startWWW;
-
